@@ -26,8 +26,10 @@ public class Money implements Expression {
         return this.amount == money.amount && this.currency == money.currency;
     }
 
-    public Money reduce(String to) {
-        return this;
+    @Override
+    public Money reduce(Bank bank, String to) {
+        Integer rate = bank.rate(this.currency, to);
+        return new Money(this.amount/rate, to);
     }
 
     public  String currency(){
