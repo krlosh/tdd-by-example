@@ -2,11 +2,11 @@ package guru.springframework;
 
 import java.util.HashMap;
 
-public class Bank {
+class Bank {
 
-    private HashMap<Pair, Integer> rateMap = new HashMap<>();
+    private final HashMap<Pair, Integer> rateMap = new HashMap<>();
 
-    public Money reduce(Expression expression, String toCurrency) {
+    Money reduce(Expression expression, String toCurrency) {
         return expression.reduce(this, toCurrency);
     }
 
@@ -14,10 +14,8 @@ public class Bank {
         if(from.equalsIgnoreCase(to)) {
             return 1;
         }
-        Integer rate  = this.rateMap.get(new Pair(from, to));
+        return this.rateMap.get(new Pair(from, to));
 
-        return rate;
-        //return (from.equalsIgnoreCase("CHF") && to.equalsIgnoreCase("USD"))?2:1;
     }
 
     public void addRate(String from, String to, int rate) {
