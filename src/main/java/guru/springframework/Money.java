@@ -26,11 +26,15 @@ public class Money implements Expression {
         return this.amount == money.amount && this.currency == money.currency;
     }
 
+    public Money reduce(String to) {
+        return this;
+    }
+
     public  String currency(){
         return this.currency;
     }
 
     public Expression plus(Money addendum) {
-        return new Money(this.amount + addendum.amount, this.currency);
+        return new Sum(this, addendum);
     }
 }
